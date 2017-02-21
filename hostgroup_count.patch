@@ -1,0 +1,15 @@
+Index: include/classes/items/CHelpItems.php
+===================================================================
+--- include/classes/items/CHelpItems.php	(revision 65659)
++++ include/classes/items/CHelpItems.php	(working copy)
+@@ -875,6 +875,10 @@
+ 					'description' => _('Startup time of Zabbix server, Unix timestamp.')
+ 				],
+ 				[
++					'key' => 'zabbix[hostgroup_count,group_name]',
++					'description' => _('Number of hosts inside host group with group_name.')
++				],
++				[
+ 					'key' => 'zabbix[history]',
+ 					'description' => _('Number of values stored in table HISTORY.')
+ 				],

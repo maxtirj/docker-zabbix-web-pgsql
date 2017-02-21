@@ -1,0 +1,15 @@
+Index: include/classes/items/CHelpItems.php
+===================================================================
+--- include/classes/items/CHelpItems.php	(revision 65686)
++++ include/classes/items/CHelpItems.php	(working copy)
+@@ -915,6 +915,10 @@
+ 					'description' => _('Number of monitored hosts')
+ 				],
+ 				[
++					'key' => 'zabbix[hostgroup_active_trigger_count,HOSTGROUP,SEVERITY]',
++					'description' => _('Number of active triggers with severity greater than or equals to SEVERITY in hostgroup HOSTGROUP.')
++				],
++				[
+ 					'key' => 'zabbix[items]',
+ 					'description' => _('Number of items in Zabbix database.')
+ 				],
