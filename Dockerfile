@@ -8,6 +8,7 @@ ARG DB_TYPE=postgresql
 ENV LANG=en_US.UTF-8 LANGUAGE=en_US:en LC_ALL=en_US.UTF-8 DEBIAN_FRONTEND=noninteractive TERM=xterm
 ADD hostgroup_active_trigger_count.patch  /tmp/
 ADD hostgroup_count.patch /tmp/
+ADD host_name_macro.patch /tmp/
 RUN DISTRIB_CODENAME=$(/bin/bash -c 'source /etc/lsb-release && echo $DISTRIB_CODENAME') && \
     locale-gen $LC_ALL && \
     echo "#!/bin/sh\nexit 0" > /usr/sbin/policy-rc.d && \
@@ -69,6 +70,7 @@ RUN cd /usr/share/ && \
     patch -p3 < /tmp/font-config && \
     patch -p0 -i /tmp/hostgroup_count.patch && \
     patch -p0 -i /tmp/hostgroup_active_trigger_count.patch && \
+    patch -p0 -i /tmp/host_name_macro.patch && \
     rm /tmp/font-config && \
     rm /tmp/hostgroup_count.patch && \
     rm /tmp/hostgroup_active_trigger_count.patch && \

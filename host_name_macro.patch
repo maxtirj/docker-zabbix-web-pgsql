@@ -1,0 +1,36 @@
+Index: include/maps.inc.php
+===================================================================
+--- include/maps.inc.php	(revision 66173)
++++ include/maps.inc.php	(working copy)
+@@ -112,7 +112,7 @@
+ 
+ 	$hosts = API::Host()->get([
+ 		'hostids' => $hostIds,
+-		'output' => ['hostid', 'status'],
++		'output' => ['hostid', 'name', 'status'],
+ 		'nopermissions' => true,
+ 		'preservekeys' => true,
+ 		'selectGraphs' => API_OUTPUT_COUNT,
+@@ -162,8 +162,12 @@
+ 
+ 		switch ($elem['elementtype']) {
+ 			case SYSMAP_ELEMENT_TYPE_HOST:
+-				$host = $hosts[$elem['elementid']];
++				$host = $hosts[$elem['elementid']];			
+ 
++				foreach ($elem['urls'] as $urlId => $url) {
++					$elem['urls'][$urlId]['url'] = str_replace('{HOST.NAME}', $host['name'], $url['url']);
++				}
++
+ 				if ($hostScripts[$elem['elementid']]) {
+ 					$hostId = $elem['elementid'];
+ 					$scripts = $hostScripts[$elem['elementid']];
+@@ -185,6 +189,8 @@
+ 				$gotos['inventory'] = ['hostid' => $host['hostid']];
+ 
+ 				$gotos['latestData'] = ['hostids' => [$host['hostid']]];
++
++				
+ 				break;
+ 
+ 			case SYSMAP_ELEMENT_TYPE_MAP:
